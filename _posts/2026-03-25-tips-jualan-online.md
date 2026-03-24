@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Resep Donat Kentang Super Empuk untuk Jualan
-description: Panduan langkah demi langkah membuat donat kentang yang tahan lama kelembutannya, cocok untuk titip di warung atau kantin.
+title: Resep Donat Super Empuk
+description: Panduan langkah demi.
 og_image: https://donat.id/app/ukm/donat-kentang.png
 ---
 
-Donat kentang adalah primadona di kalangan UMKM karena teksturnya yang lebih lembut dibandingkan donat terigu biasa.
+Donat adalah primadona dsa.
 
 ### Bahan-bahan:
 * 500g Tepung terigu protein tinggi
