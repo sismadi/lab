@@ -1,29 +1,21 @@
 ---
 layout: default
-title: Daftar Menu UMKM
-tampilkan_menu: "donat"
+title: Rahasia Donat Coklat Lembut UMKM
 ---
 
+<h1>Cara Membuat Donat Coklat</h1>
+<p>Ini adalah isi artikel tentang pembuatan donat coklat...</p>
 
-<h1>Menu Spesial Kami</h1>
+<hr>
 
-{% if page.tampilkan_semua == "donat" %}
-
-  <h2>Daftar Donat Lumer</h2>
-  <ul>
-    {% for item in site.data.menu_donat %}
-      <li>{{ item.nama }} - Rp {{ item.harga }}</li>
-    {% endfor %}
-  </ul>
-
-{% elsif page.tampilkan_semua == "ayam" %}
-  <h2>Daftar Ayam Geprek</h2>
-  <ul>
-    {% for item in site.data.menu_ayam %}
-      <li>{{ item.nama }} - Rp {{ item.harga }}</li>
-    {% endfor %}
-  </ul>
-
-{% else %}
-  <p>Menu tidak ditemukan.</p>
-{% endif %}
+<h3>Menu Donat Kami:</h3>
+<div class="menu-container">
+  {% for donat in site.data.menu_donat %}
+    <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+      <strong>{{ donat.nama }}</strong> - Rp {{ donat.harga }}
+      {% if donat.status %}
+        <span style="background: gold; padding: 2px 5px; font-size: 12px;">{{ donat.status }}</span>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
