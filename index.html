@@ -8,14 +8,80 @@ title: Rahasia Donat Coklat Lembut UMKM
 
 <hr>
 
-<h3>Menu Donat Kami:</h3>
-<div class="menu-container">
-  {% for donat in site.data.menu_donat %}
-    <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
-      <strong>{{ donat.nama }}</strong> - Rp {{ donat.harga }}
-      {% if donat.status %}
-        <span style="background: gold; padding: 2px 5px; font-size: 12px;">{{ donat.status }}</span>
-      {% endif %}
+<h3>Menu Kami:</h3>
+
+<!-- Nav Tab Pemilih Menu via URL Parameter -->
+<nav class="menu-nav">
+  <a href="?menu=donat" class="menu-tab" id="tab-donat">🍩 Menu Donat</a>
+  <a href="?menu=ayam" class="menu-tab" id="tab-ayam">🍗 Menu Ayam</a>
+</nav>
+
+<!-- Container Menu -->
+<div class="menu-container" id="menu-display"></div>
+
+<style>
+  .menu-nav { margin-bottom: 16px; }
+  .menu-tab {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-right: 8px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+  }
+  .menu-tab.active {
+    background: #f5a623;
+    color: white;
+    border-color: #f5a623;
+  }
+  .menu-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+  .badge {
+    background: gold;
+    padding: 2px 6px;
+    font-size: 12px;
+    border-radius: 3px;
+    margin-left: 6px;
+  }
+</style>
+
+<script>
+  // Data diinject dari Jekyll saat build
+  const dataMenu = {
+    donat: [
+      {% for item in site.data.menu_donat %}
+      { nama: {{ item.nama | jsonify }}, harga: {{ item.harga | jsonify }}, status: {{ item.status | default: "" | jsonify }} }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    ayam: [
+      {% for item in site.data.menu_ayam %}
+      { nama: {{ item.nama | jsonify }}, harga: {{ item.harga | jsonify }}, status: {{ item.status | default: "" | jsonify }} }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  };
+
+  // Baca parameter ?menu= dari URL
+  const params = new URLSearchParams(window.location.search);
+  const menuAktif = params.get('menu') || 'donat'; // default: donat
+
+  // Tandai tab yang aktif
+  const tabAktif = document.getElementById('tab-' + menuAktif);
+  if (tabAktif) tabAktif.classList.add('active');
+
+  // Render menu sesuai parameter
+  const data = dataMenu[menuAktif] || dataMenu['donat'];
+  const container = document.getElementById('menu-display');
+  container.innerHTML = data.map(item => `
+    <div class="menu-item">
+      <strong>${item.nama}</strong> — Rp ${item.harga}
+      ${item.status ? `<span class="badge">${item.status}</span>` : ''}
     </div>
-  {% endfor %}
-</div>
+  `).join('');
+</script>
