@@ -8,3 +8,15 @@ og_type: article
 
 <h1>Cara Membuat Donat Coklat</h1>
 <p>Ini adalah isi artikel tentang pembuatan donat coklat yang lezat...</p>
+
+<h3>Menu Donat Kami:</h3>
+<div class="menu-container">
+  {% for donat in site.data.menu_donat %}
+    <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+      <strong>{{ donat.nama }}</strong> - Rp {{ donat.harga }}
+      {% if donat.status %}
+        <span style="background: gold; padding: 2px 5px; font-size: 12px;">{{ donat.status }}</span>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
